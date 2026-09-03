@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minecraft Statistics</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div id="header">
+        <div class="container">
+            <h1>Minecraft Statistics</h1>
+            <nav class="nav-links">
+                <a href="Shoutout.html">Shoutouts</a>
+
+<div class="dropdown">
+  <!-- The trigger button -->
+  <button class="Enchantments">Enchantments</button>
+  
+  <!-- The dropdown menu links -->
+  <div class="dropdown-content">
+  <a href="Ranged Weapons.html">Ranged Weapons</a>
+  <a href="Melee Weapons.html">Melee Weapons</a>
+  <a href="All Purpose.html">All Porpose</a>
+  <a href="Armor.html">Armor</a>
+  <a href="Tools.html">Tools</a>
+  </div>
+</div>
+
+            </nav>
+        </div>
+    </div>
+
+        <main id="main" class="page-layout container">
+            <section class="content">
+                <article class="card">
+                    <h2>About Me</h2>
+                    <p>Hi Im ygc (not real name). I like Minecraft and I have been playing it for 5 years. I also have a youtube chanel.</p>
+                    <a href="https://www.youtube.com/@ygc-minecraft">https://www.youtube.com/@ygc-minecraft</a>
+
+                </article>
+
+                <article class="card">
+                    <h2>About the Website</h2>
+                    <p>This website is a set of tools and reference pages for Minecraft players. The Damage Calculator works out exactly how much damage you'll take in PvP or PvE, factoring in your sword, armor, armor toughness, and enchantments like Sharpness and Protection. The Enchantments page is a quick reference for every enchantment in the game, organized by weapon and armor type. There's also a Shoutouts page recognizing some of my friends.</p>
+                    <!-- Add YT chanel link -->
+                </article>
+            </section>
+
+            <aside class="sidebar home-sidebar">
+                <div class="card damage-calc">
+                    <h2>Damage Counter</h2>
+
+                    <!-- Pick a Sword Dropdown -->
+                    <div class="input-group">
+                        <label for="swordSelect">Pick a Sword:</label>
+                        <select id="swordSelect" onchange="updateSwordDamage()">
+                            <option value="custom">Custom Value</option>
+                            <option value="4">Wood / Gold Sword (4 Damage)</option>
+                            <option value="5">Stone Sword (5 Damage)</option>
+                            <option value="6">Iron Sword (6 Damage)</option>
+                            <option value="7">Diamond Sword (7 Damage)</option>
+                            <option value="8" selected>Netherite Sword (8 Damage)</option>
+                        </select>
+                    </div>
+
+                    <!-- Raw Damage Input -->
+                    <div class="input-group">
+                        <label for="rawDamage">Incoming Damage (Points):</label>
+                        <input type="number" id="rawDamage" value="8" min="0" step="0.5">
+                        <small>1 Point = Half a Heart</small>
+                    </div>
+
+                    <!-- Pick Armor Dropdown -->
+                    <div class="input-group">
+                        <label for="armorSelect">Pick Armor Set:</label>
+                        <select id="armorSelect" onchange="updateArmorStats()">
+                            <option value="custom">Custom Values</option>
+                            <option value="0,0">No Armor (0 Armor, 0 Toughness)</option>
+                            <option value="11,0">Full Leather (11 Armor, 0 Toughness)</option>
+                            <option value="15,0">Full Iron (15 Armor, 0 Toughness)</option>
+                            <option value="20,0">Full Diamond (20 Armor, 0 Toughness)</option>
+                            <option value="20,12" selected>Full Netherite (20 Armor, 12 Toughness)</option>
+                        </select>
+                    </div>
+
+                    <!-- Armor Points Input -->
+                    <div class="input-group">
+                        <label for="armorPoints">Armor Points (0 - 20):</label>
+                        <input type="number" id="armorPoints" value="20" min="0" max="20">
+                    </div>
+
+                    <!-- Armor Toughness Input -->
+                    <div class="input-group">
+                        <label for="toughness">Armor Toughness (0 - 12):</label>
+                        <input type="number" id="toughness" value="12" min="0" max="12">
+                    </div>
+
+                    <h3>Enchantments</h3>
+
+                    <!-- Sharpness Dropdown -->
+                    <div class="input-group">
+                        <label for="sharpnessLevel">Sword: Sharpness Level</label>
+                        <select id="sharpnessLevel">
+                            <option value="0" selected>None</option>
+                            <option value="1">Sharpness I</option>
+                            <option value="2">Sharpness II</option>
+                            <option value="3">Sharpness III</option>
+                            <option value="4">Sharpness IV</option>
+                            <option value="5">Sharpness V</option>
+                        </select>
+                        <small>Adds bonus damage before armor reduction</small>
+                    </div>
+
+                    <!-- Protection Dropdown -->
+                    <div class="input-group">
+                        <label for="protectionLevel">Armor: Protection Level (per piece)</label>
+                        <select id="protectionLevel">
+                            <option value="0" selected>None</option>
+                            <option value="1">Protection I</option>
+                            <option value="2">Protection II</option>
+                            <option value="3">Protection III</option>
+                            <option value="4">Protection IV</option>
+                        </select>
+                        <small>Assumes all 4 armor pieces have this level</small>
+                    </div>
+
+                    <button onclick="calculateDamage()">Calculate Damage</button>
+
+                    <!-- Results Display -->
+                    <div class="result" id="resultBox" style="display: none;">
+                        <div><strong>Damage Taken:</strong> <span id="finalDamage">0</span> points</div>
+                        <div><strong>Hearts Lost:</strong> <span id="heartsDisplay" class="hearts"></span></div>
+                    </div>
+                </div>
+            </aside>
+        </main>
+
+    <footer class="site-footer container">
+        <p>This is not a Mojang official product. This product is not affiliated with Mojang or Microsoft</p>
+    </footer>
+
+    <script>
+        function updateSwordDamage() {
+            const selection = document.getElementById('swordSelect').value;
+            if (selection !== 'custom') {
+                document.getElementById('rawDamage').value = selection;
+            }
+        }
+
+        function updateArmorStats() {
+            const selection = document.getElementById('armorSelect').value;
+            if (selection !== 'custom') {
+                const stats = selection.split(',');
+                document.getElementById('armorPoints').value = stats[0];
+                document.getElementById('toughness').value = stats[1];
+            }
+        }
+
+        function calculateDamage() {
+            let rawDamage = parseFloat(document.getElementById('rawDamage').value) || 0;
+            const armor = parseFloat(document.getElementById('armorPoints').value) || 0;
+            const toughness = parseFloat(document.getElementById('toughness').value) || 0;
+            const sharpness = parseFloat(document.getElementById('sharpnessLevel').value) || 0;
+            const protection = parseFloat(document.getElementById('protectionLevel').value) || 0;
+
+            if (sharpness > 0) {
+                rawDamage += (0.5 * sharpness + 0.5);
+            }
+
+            const defensePoints = armor - (rawDamage / (2 + toughness / 4));
+            const maxDefense = Math.max(armor / 5, defensePoints);
+            const reductionMultiplier = 1 - (Math.min(20, maxDefense) / 25);
+
+            let finalDamage = rawDamage * reductionMultiplier;
+
+            if (protection > 0) {
+                const epf = Math.min(20, protection * 4);
+                const protectionMultiplier = 1 - (epf / 25);
+                finalDamage *= protectionMultiplier;
+            }
+
+            finalDamage = Math.round(finalDamage * 100) / 100;
+
+            document.getElementById('finalDamage').textContent = finalDamage;
+            document.getElementById('resultBox').style.display = 'block';
+
+            const totalHalfHearts = Math.round(finalDamage);
+            const fullHearts = Math.floor(totalHalfHearts / 2);
+            const hasHalfHeart = totalHalfHearts % 2 !== 0;
+
+            let heartString = '';
+            for (let i = 0; i < fullHearts; i++) {
+                heartString += '❤️';
+            }
+            if (hasHalfHeart) {
+                heartString += '💔';
+            }
+            if (heartString === '') heartString = 'None';
+            document.getElementById('heartsDisplay').textContent = heartString;
+        }
+    </script>
+
+</body>
+</html>
+
